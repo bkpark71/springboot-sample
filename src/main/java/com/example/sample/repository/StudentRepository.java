@@ -11,4 +11,5 @@ public interface StudentRepository {
     Student findById(int id);
     void updateStudent(Student student);
     int addStudent(Student student);
+
 }
