@@ -2,6 +2,7 @@ package com.example.sample.controller;
 
 import com.example.sample.domain.Score;
 import com.example.sample.domain.Student;
+import com.example.sample.domain.StudentInquiryDto;
 import com.example.sample.service.ScoreService;
 import com.example.sample.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +71,13 @@ public class StudentController {
     public String addNewStudent(@ModelAttribute Student student){
         studentService.addNewStudent(student);
         return "redirect:/students";
+    }
+
+    @GetMapping("/inquiry")
+    public String getStudentsInquiry(@ModelAttribute StudentInquiryDto studentInquiryDto,
+                                     Model model){
+        List<Student> students = studentService.getStudentInquiry(studentInquiryDto);
+        model.addAttribute("students", students);
+        return "student/studentList";
     }
 }

@@ -20,4 +20,21 @@
         SET point = #{point}
         WHERE id =#{id}
     </update>
+<!--동적쿼리-->
+    <select id="findByInquiryDto" parameterType="StudentInquiryDto"
+           resultType="Student">
+        SELECT *
+        FROM student
+        <where>
+            <if test="univ != null and univ != '' ">
+                univ like #{univ}
+            </if>
+            <if test="name != null and name != '' ">
+                AND name like #{name}
+            </if>
+            <if test="point != null">
+                AND point >= #{point}
+            </if>
+        </where>
+    </select>
 </mapper>
